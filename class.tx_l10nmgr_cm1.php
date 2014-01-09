@@ -70,7 +70,7 @@ class tx_l10nmgr_cm1 {
 		if (!$backRef->cmLevel)	{
 
 				// Returns directly, because the clicked item was not from the pages table
-			if ($table=="tx_l10nmgr_cfg")	{
+			if ($table=="tx_l10nmgr_cfg")   {	
 
 					// Adds the regular item:
 				$LL = $this->includeLL();
@@ -85,29 +85,29 @@ class tx_l10nmgr_cm1 {
 					1	// Disables the item in the top-bar. Set this to zero if you with the item to appear in the top bar!
 				);
 			}
-			
-			$localItems["moreoptions_tx_l10nmgr_cm3"] = $backRef->linkItem(
-				'L10Nmgr tools',
-				'',
-				"top.loadTopMenu('".t3lib_div::linkThisScript()."&cmLevel=1&subname=moreoptions_tx_l10nmgrXX_cm3');return false;",
-				0,
-				1
-			);			
+
+                        $localItems["moreoptions_tx_l10nmgr_cm3"] = $backRef->linkItem(
+                                'L10Nmgr tools',
+                                '',
+                                "top.loadTopMenu('".t3lib_div::linkThisScript()."&cmLevel=1&subname=moreoptions_tx_l10nmgrXX_cm3');return false;",
+                                0,
+                                1
+                        );
 
 				// Simply merges the two arrays together and returns ...
 			$menuItems=array_merge($menuItems,$localItems);
 		} elseif (t3lib_div::_GET('subname')=='moreoptions_tx_l10nmgrXX_cm3') {
 
 			$url = t3lib_extMgm::extRelPath("l10nmgr")."cm3/index.php?id=".$uid.'&table='.$table;
-			$localItems[] = $backRef->linkItem('Create priority','',$backRef->urlRefForCM($url.'&cmd=createPriority'),1);
-			$localItems[] = $backRef->linkItem('Manage priorities','',$backRef->urlRefForCM($url.'&cmd=managePriorities'),1);
-			$localItems[] = $backRef->linkItem('Update Index','',$backRef->urlRefForCM($url.'&cmd=updateIndex'),1);
-			$localItems[] = $backRef->linkItem('Flush Translations','',$backRef->urlRefForCM($url.'&cmd=flushTranslations'),1);
-			
+                        $localItems[] = $backRef->linkItem('Create priority','',$backRef->urlRefForCM($url.'&cmd=createPriority'),1);
+                        $localItems[] = $backRef->linkItem('Manage priorities','',$backRef->urlRefForCM($url.'&cmd=managePriorities'),1);
+                        $localItems[] = $backRef->linkItem('Update Index','',$backRef->urlRefForCM($url.'&cmd=updateIndex'),1);
+                        $localItems[] = $backRef->linkItem('Flush Translations','',$backRef->urlRefForCM($url.'&cmd=flushTranslations'),1);
+
 			$menuItems=array_merge($menuItems,$localItems);
 		}
-		
-		
+
+
 		return $menuItems;
 	}
 

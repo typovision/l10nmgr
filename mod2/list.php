@@ -146,6 +146,7 @@ class tx_l10nmgr_module1 extends t3lib_SCbase {
 		$tRows = array();
 		$c=0;
 		foreach($priorities as $priorityRecord)	{
+
 			if ($lTable = $this->languageRows($priorityRecord['languages'],$priorityRecord['element']))	{
 				$c++;
 				$tRows[] = '
@@ -212,7 +213,7 @@ class tx_l10nmgr_module1 extends t3lib_SCbase {
 				} else {$pmLink = '';}
 					
 				$cells = '<td>'.$icon.$linkToIt.$pmLink.'</td>';
-							
+
 				foreach($languages as $l)	{
 					if ($l>=1) $cells.= '<td align="center">'.$hookObj->calcStat(array($el[0],$el[1]), $l).'</td>';
 				}

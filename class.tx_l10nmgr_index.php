@@ -84,7 +84,7 @@ class tx_l10nmgr_index extends tx_lowlevel_cleaner_core {
 		$this->cli_options[] = array('--workspace id', 'Setting workspace uid for the session. Default is "0" for live workspace. The translation index depends on the workspace.');
 		$this->cli_options[] = array('--depth int', 'Setting traversal depth. 0 (zero) will only analyse start page (see --pid), 1 will traverse one level of subpages etc.');
 		$this->cli_options[] = array('--noFlush', 'If set, the index for the workspace will not be flushed. Normally you want to flush the index as a part of the process to make sure the rebuild of the index is empty before building it. But in cases you build individual parts of the tree you may like to use this option.');
-		$this->cli_options[] = array('--bypassFilter', 'If set, the external filter will not be called. The external filter allows other extensions to block certain records from getting processed. For instance TemplaVoila provides such a filter than will make sure records which are not used on a page are not indexed.');
+                $this->cli_options[] = array('--bypassFilter', 'If set, the external filter will not be called. The external filter allows other extensions to block certain records from getting processed. For instance TemplaVoila provides such a filter than will make sure records which are not used on a page are not indexed.');
 
 		$this->cli_help['name'] = 'tx_l10nmgr_index -- Building translation index';
 		$this->cli_help['description'] = trim('
@@ -121,9 +121,9 @@ Traversing page tree and building an index of translation needs
 		}
 
 		$this->resultArray = &$resultArray;
-		foreach($startingPoints as $pidPoint)	{
-			if ($pidPoint>=0)	$this->genTree($pidPoint,$depth,(int)$this->cli_argValue('--echotree'),'main_parseTreeCallBack');
-		}
+                foreach($startingPoints as $pidPoint)   {
+                        if ($pidPoint>=0)       $this->genTree($pidPoint,$depth,(int)$this->cli_argValue('--echotree'),'main_parseTreeCallBack');
+                }
 
 		return $resultArray;
 	}
@@ -177,14 +177,14 @@ Traversing page tree and building an index of translation needs
 	function main_autoFix($resultArray)	{
 			// Init:
 		$t8Tools = t3lib_div::makeInstance('tx_l10nmgr_tools');
-		$t8Tools->verbose = FALSE;	// Otherwise it will show records which has fields but none editable
+		$t8Tools->verbose = FALSE;	// Otherwise it will show records which has fields but none editable.
 
-		if (!$this->cli_isArg('--noFlush'))	{
-			echo 'Flushing translation index for workspace '.$GLOBALS['BE_USER']->workspace.chr(10);
-			$t8Tools->flushIndexOfWorkspace($GLOBALS['BE_USER']->workspace);
-		} else {
-			echo 'Did NOT flush translation index for workspace '.$GLOBALS['BE_USER']->workspace.' since it was disabled by --noFlush'.chr(10);
-		}
+                if (!$this->cli_isArg('--noFlush'))     {
+                        echo 'Flushing translation index for workspace '.$GLOBALS['BE_USER']->workspace.chr(10);
+                        $t8Tools->flushIndexOfWorkspace($GLOBALS['BE_USER']->workspace);
+                } else {
+                        echo 'Did NOT flush translation index for workspace '.$GLOBALS['BE_USER']->workspace.' since it was disabled by --noFlush'.chr(10);
+                }
 
 		foreach($this->resultArray['index'] as $pageId => $accum)	{
 			echo 'Adding entries for page '.$pageId.' "'.$accum['header']['title'].'":'.chr(10);
@@ -199,4 +199,7 @@ Traversing page tree and building an index of translation needs
 	}
 }
 
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/l10nmgr/class.tx_l10nmgr_index.php'])        {
+        include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/l10nmgr/class.tx_l10nmgr_index.php']);
+}
 ?>
