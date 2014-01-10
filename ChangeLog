@@ -1,5 +1,6 @@
 2014-01-10 Lars Trebing <lars@trebing.name>
 	* [BUGFIX] Remove redundant workspace constraint
+	* [RELEASE] Version 3.4.50-tv-1
 
 2013-05-05 Andreas Otto <andreas@otto-hanika.de>
 	* [FEATURE] Allows importing translations into default language.
