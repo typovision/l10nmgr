@@ -155,7 +155,6 @@ class tx_l10nmgr_tools {
 				$table,
 				'pid=' . intval($pageId) .
 					' AND ' . $TCA[$table]['ctrl']['languageField'] . '<=0' .
-					($GLOBALS['TCA'][$table]['ctrl']['versioningWS'] ? ' AND ' . $table . '.t3ver_state<=0' : '') .
 					$hiddenClause .
 					t3lib_BEfunc::deleteClause($table) .
 					t3lib_BEfunc::versioningPlaceholderClause($table)
@@ -183,7 +182,6 @@ class tx_l10nmgr_tools {
 				$table,
 				'uid=' . intval($uid) .
 					' AND ' . $TCA[$table]['ctrl']['languageField'] . '<=0' .
-					($GLOBALS['TCA'][$table]['ctrl']['versioningWS'] ? ' AND ' . $table . '.t3ver_state<=0' : '') .
 					t3lib_BEfunc::deleteClause($table) .
 					t3lib_BEfunc::versioningPlaceholderClause($table)
 			);
