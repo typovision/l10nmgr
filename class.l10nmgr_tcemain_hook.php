@@ -101,6 +101,8 @@ class tx_l10nmgr_tcemain_hook {
 				$liveRecord = t3lib_BEfunc::getRecord($table, $liveRecord[$fld],'uid');
 			}
 
+			$languageID = tx_l10nmgr_l10nBaseService::getTargetLanguageID();
+
 			if (is_array($liveRecord))	{
 #				echo "indexing id ".$liveRecord['uid'];
 					// Finally, we have found the "root record" and will check it:
@@ -108,7 +110,7 @@ class tx_l10nmgr_tcemain_hook {
 				$t8Tools->verbose = FALSE;	// Otherwise it will show records which has fields but none editable.
 
 #				debug($t8Tools->indexDetailsRecord($table,$liveRecord['uid']));
-				$t8Tools->updateIndexTableFromDetailsArray($t8Tools->indexDetailsRecord($table,$liveRecord['uid']));
+				$t8Tools->updateIndexTableFromDetailsArray($t8Tools->indexDetailsRecord($table, $liveRecord['uid'], $languageID));
 			}
 		}
 	}

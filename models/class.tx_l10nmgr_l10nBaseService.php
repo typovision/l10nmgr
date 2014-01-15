@@ -44,6 +44,15 @@ class tx_l10nmgr_l10nBaseService {
 	 */
 	protected $importAsDefaultLanguage = FALSE;
 
+	protected static $targetLanguageID = NULL;
+
+	/**
+	 * @return integer|NULL
+	 */
+	public static function getTargetLanguageID() {
+		return self::$targetLanguageID;
+	}
+
 	/**
 	 * Setter for $importAsDefaultLanguage
 	 *
@@ -194,6 +203,8 @@ class tx_l10nmgr_l10nBaseService {
 //debug($TCEmain_cmd,'$TCEmain_cmd');
 //debug($TCEmain_data,'$TCEmain_data');
 
+			self::$targetLanguageID = $Tlang;
+
 				// Execute CMD array: Localizing records:
 				/** @var $tce t3lib_TCEmain */
 			$tce = t3lib_div::makeInstance('t3lib_TCEmain');
@@ -245,6 +256,8 @@ class tx_l10nmgr_l10nBaseService {
 			//print_r($TCEmain_data);
 			$tce->start($TCEmain_data,array());	// check has been done previously that there is a backend user which is Admin and also in live workspace
 			$tce->process_datamap();
+
+			self::$targetLanguageID = NULL;
 
 			if (count($tce->errorLog))	{
 				t3lib_div::sysLog(__FILE__ . ': ' . __LINE__ . ': TCEmain update errors: ' . t3lib_div::arrayToLogString($tce->errorLog), 'l10nmgr');

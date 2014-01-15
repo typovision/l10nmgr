@@ -593,9 +593,10 @@ class tx_l10nmgr_tools {
 	 *
 	 * @param	string		$table	Table name
 	 * @param	integer		$uid	Record UID
+	 * @param integer|NULL $languageID Language ID of the record
 	 * @return	mixed		FALSE if the input record is not one that can be translated. Otherwise an array holding information about the status.
 	 */
-	function indexDetailsRecord($table, $uid) {
+	function indexDetailsRecord($table, $uid, $languageID = NULL) {
 		$rec = $table == 'pages' ? t3lib_BEfunc::getRecord($table, $uid) : $this->getSingleRecordToTranslate($table, $uid);
 
 		if (is_array($rec) && $rec['pid'] != -1) {
@@ -604,8 +605,10 @@ class tx_l10nmgr_tools {
 				t3lib_BEfunc::workspaceOL($table, $rec);
 				$items = array();
 				foreach ($this->sys_languages as $r) {
-					$items['fullDetails'][$r['uid']] = $this->translationDetails($table, $rec, $r['uid']);
-					$items['indexRecord'][$r['uid']] = $this->compileIndexRecord($table, $items['fullDetails'][$r['uid']], $r['uid'], $pid);
+					if (is_null($languageID) || $r['uid'] === $languageID) {
+						$items['fullDetails'][$r['uid']] = $this->translationDetails($table, $rec, $r['uid']);
+						$items['indexRecord'][$r['uid']] = $this->compileIndexRecord($table, $items['fullDetails'][$r['uid']], $r['uid'], $pid);
+					}
 				}
 				return $items;
 			} else {
