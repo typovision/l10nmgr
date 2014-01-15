@@ -83,6 +83,8 @@ class tx_l10nmgr_tools {
 	var $sys_languages = array(); // System languages records, loaded by constructor
 	var $indexFilterObjects = array();
 
+	static $systemLanguages;
+
 	/**
 	 * Constructor
 	 * Setting up internal variable ->t8Tools
@@ -191,6 +193,16 @@ class tx_l10nmgr_tools {
 	}
 
 	/**
+	 * @return array
+	 */
+	protected function getSystemLanguages() {
+		if (is_null(self::$systemLanguages)) {
+			self::$systemLanguages = $this->t8Tools->getSystemLanguages();
+		}
+		return self::$systemLanguages;
+	}
+
+	/**
 	 * Generate details about translation
 	 *
 	 * @param	string		Table name
@@ -211,7 +223,7 @@ class tx_l10nmgr_tools {
 			// Initialize some more:
 			$this->detailsOutput['translationInfo'] = $tInfo;
 			t3lib_div::loadTCA($table);
-			$this->sysLanguages = $this->t8Tools->getSystemLanguages();
+			$this->sysLanguages = $this->getSystemLanguages();
 			$this->detailsOutput['ISOcode'] = $this->sysLanguages[$sysLang]['ISOcode'];
 
 			//decide how translations are stored:

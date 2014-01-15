@@ -1,5 +1,6 @@
 2014-01-15 Lars Trebing <lars@trebing.name>
 	* [FEATURE] Skip unaffected languages during import (performance improvement)
+	* [FEATURE] Cache language array in tx_l10nmgr_tools (performance improvement)
 
 2014-01-10 Lars Trebing <lars@trebing.name>
 	* [BUGFIX] Remove redundant workspace constraint
