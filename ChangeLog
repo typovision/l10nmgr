@@ -1,3 +1,6 @@
+2014-01-22 Lars Trebing <lars@trebing.name>
+	* [BUGFIX] Provide the user with helpful information when the CLI import cannot read a file
+
 2014-01-15 Lars Trebing <lars@trebing.name>
 	* [FEATURE] Skip unaffected languages during import (performance improvement)
 	* [FEATURE] Cache language array in tx_l10nmgr_tools (performance improvement)

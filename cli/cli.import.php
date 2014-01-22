@@ -456,7 +456,11 @@ class tx_cliimport_cli extends t3lib_cli {
 					}
 				}
 				catch (Exception $e) {
-					$errorMessage = 'Badly formatted file (' . $e->getMessage() . ')';
+					if ($e->getCode() == 1390394945) {
+						$errorMessage = $e->getMessage();
+					} else {
+						$errorMessage = 'Badly formatted file (' . $e->getMessage() . ')';
+					}
 					$out .= "\n\n" . $xmlFile . ': ' . $errorMessage;
 						// Store the error message for later reporting by mail
 					$this->filesImported[$xmlFile] = array(
@@ -619,9 +623,17 @@ class tx_cliimport_cli extends t3lib_cli {
 	 *
 	 * @param string $filepath Path to the file
 	 * @return bool
+	 * @throws RuntimeException
 	 */
 	protected function getXMLFileHead($filepath) {
-		$fileContent = t3lib_div::getUrl($filepath);
+		$getURLReport = array();
+		$fileContent = t3lib_div::getUrl($filepath, 0, FALSE, $getURLReport);
+		if ($getURLReport['error']) {
+			throw new RuntimeException(
+				"File or URL cannot be read.\n  t3lib_div::getURL() error code: " . $getURLReport['error'] . "\n  t3lib_div::getURL() message: “" . $getURLReport['message'] . '”',
+				1390394945
+			);
+		}
 			// For some reason PHP chokes on incoming &nbsp; in XML!
 		$xmlNodes = t3lib_div::xml2tree(str_replace('&nbsp;', ' ', $fileContent), 3);
 
