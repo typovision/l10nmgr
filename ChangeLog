@@ -1,12 +1,15 @@
 2014-01-22 Lars Trebing <lars@trebing.name>
 	* [BUGFIX] Provide the user with helpful information when the CLI import cannot read a file
+	* [RELEASE] Version 3.4.50-tv-3
 
 2014-01-15 Lars Trebing <lars@trebing.name>
 	* [FEATURE] Skip unaffected languages during import (performance improvement)
 	* [FEATURE] Cache language array in tx_l10nmgr_tools (performance improvement)
+	* [RELEASE] Version 3.4.50-tv-2
 
 2014-01-10 Lars Trebing <lars@trebing.name>
 	* [BUGFIX] Remove redundant workspace constraint
+	* [RELEASE] Version 3.4.50-tv-1
 
 2013-05-05 Andreas Otto <andreas@otto-hanika.de>
 	* [FEATURE] Allows importing translations into default language.
